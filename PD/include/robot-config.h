@@ -6,6 +6,7 @@ extern brain Brain;
 extern motor leftDrive;
 extern motor rightDrive;
 extern controller Controller1;
+extern inertial accella;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.
