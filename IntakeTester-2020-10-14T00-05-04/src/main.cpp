@@ -13,6 +13,7 @@
 // lInkake              motor         1               
 // rInkake              motor         10              
 // bump                 bumper        A               
+// Controller1          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -27,21 +28,21 @@ int main()
   bool canToggle = false;
   while(true)
   {
-    if(canToggle && bump.pressing() && !isRunning)
+    if(canToggle && (bump.pressing() || Controller1.ButtonA.pressing()) && !isRunning)
     {
       lInkake.spin(forward, 75, percent);
       rInkake.spin(forward, 75, percent);
       isRunning = true;
       canToggle = false;
     }
-    else if(canToggle && bump.pressing() && isRunning)
+    else if(canToggle && (bump.pressing() || Controller1.ButtonA.pressing()) && isRunning)
     {
       lInkake.stop();
       rInkake.stop();
       isRunning = false;
       canToggle = false;
     }
-    else if(!canToggle && !bump.pressing())
+    else if(!canToggle && !(bump.pressing() || Controller1.ButtonA.pressing()))
     {
       canToggle = true;  //Checks to see if you've let go of the button. If you have, you can toggle the effect by pressing the button. Preventative measure.
     }
