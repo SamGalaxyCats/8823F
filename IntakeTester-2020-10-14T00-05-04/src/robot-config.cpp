@@ -11,10 +11,11 @@ brain  Brain;
 motor lInkake = motor(PORT1, ratio18_1, false);
 motor rInkake = motor(PORT10, ratio18_1, true);
 bumper bump = bumper(Brain.ThreeWirePort.A);
+controller Controller1 = controller(primary);
 
 // VEXcode generated functions
-
-
+// define variable for remote controller enable/disable
+bool RemoteControlCodeEnabled = true;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
