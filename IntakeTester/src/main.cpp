@@ -10,14 +10,14 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
-// lInkake              motor         1               
-// rInkake              motor         10              
+// lInkake              motor         15              
+// rInkake              motor         8               
 // bump                 bumper        A               
 // Controller1          controller                    
-// fLeftDrive           motor         2               
-// fRightDrive          motor         9               
-// bLeftDrive           motor         12              
-// bRightDrive          motor         19              
+// fLeftDrive           motor         5               
+// fRightDrive          motor         6               
+// bLeftDrive           motor         2               
+// bRightDrive          motor         10              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -66,19 +66,19 @@ int main()
     //arcade control
     //speedL = ((Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2); //if the joysticks are wrong, switch the + and -.
     //speedR = ((Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2);
-    /*speedR = (Controller1.Axis2.position(percent));
+    speedR = (Controller1.Axis2.position(percent));
     speedL = (Controller1.Axis3.position(percent));
     bLeftDrive.spin(forward, speedL, percent);
     fLeftDrive.spin(forward, speedL, percent);
     fRightDrive.spin(forward, speedR, percent);
-    bRightDrive.spin(forward, speedR, percent);*/
-    if(Controller1.ButtonL2.pressing())
+    bRightDrive.spin(forward, speedR, percent);
+    /*if(Controller1.ButtonL2.pressing())
     {
       bLeftDrive.spin(forward, 50, percent); 
     }
     else if(!Controller1.ButtonL2.pressing())
     {
-      bLeftDrive.stop();   
+      bLeftDrive.stop(brakeType::coast);   
     }
     else if(Controller1.ButtonL1.pressing())
     {
@@ -86,7 +86,7 @@ int main()
     }
     else if(!Controller1.ButtonL1.pressing())
     {
-      fLeftDrive.stop();  
+      fLeftDrive.stop(brakeType::coast);  
     }
     else if(Controller1.ButtonR1.pressing())
     {
@@ -94,7 +94,7 @@ int main()
     }
     else if(!Controller1.ButtonR1.pressing())
     {
-      fRightDrive.stop();  
+      fRightDrive.stop(brakeType::coast);  
     }
     else if(Controller1.ButtonR2.pressing())
     {
@@ -102,14 +102,14 @@ int main()
     }
     else if(!Controller1.ButtonR2.pressing())
     {
-      bRightDrive.stop();  
+      bRightDrive.stop(brakeType::coast);  
     }
     else
     {
-      bLeftDrive.stop();
-      bRightDrive.stop();
-      fLeftDrive.stop();
-      fRightDrive.stop();
-    }
+      //bLeftDrive.stop();
+      //bRightDrive.stop();
+      //fLeftDrive.stop();
+      //fRightDrive.stop();
+    }*/
   }
 }
