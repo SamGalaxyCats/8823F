@@ -13,10 +13,14 @@ motor fRightDrive = motor(PORT10, ratio18_1, true);
 motor bLeftDrive = motor(PORT11, ratio18_1, false);
 motor bRightDrive = motor(PORT20, ratio18_1, false);
 controller Controller1 = controller(primary);
-motor lift = motor(PORT5, ratio18_1, false);
-motor rampIntake = motor(PORT4, ratio18_1, false);
-motor bLinkake = motor(PORT15, ratio18_1, false);
-motor bRinkake = motor(PORT16, ratio18_1, true);
+motor trashHandler = motor(PORT5, ratio18_1, false);
+motor conveyor = motor(PORT4, ratio18_1, false);
+motor lIntake = motor(PORT15, ratio18_1, false);
+motor rIntake = motor(PORT16, ratio18_1, true);
+/*vex-vision-config:begin*/
+vision sight = vision (PORT17, 50);
+/*vex-vision-config:end*/
+inertial Accella = inertial(PORT18);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
