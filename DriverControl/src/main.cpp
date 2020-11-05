@@ -15,10 +15,12 @@
 // bLeftDrive           motor         11              
 // bRightDrive          motor         20              
 // Controller1          controller                    
-// lift                 motor         5               
-// rampIntake           motor         4               
-// bLinkake             motor         15              
-// bRinkake             motor         16              
+// trashHandler         motor         5               
+// conveyor             motor         4               
+// lIntake              motor         15              
+// rIntake              motor         16              
+// sight                vision        17              
+// Accella              inertial      18              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -32,11 +34,14 @@ int main()
 
   double speedL;
   double speedR; 
+  double conveyorSpeed = 50;
+
+  bool hasTrash = false;
   
-  lift.setStopping(hold);
-  rampIntake.setStopping(hold);
-  bRinkake.setStopping(hold);
-  bLinkake.setStopping(hold);
+  trashHandler.setStopping(hold);
+  lIntake.setStopping(hold);
+  rIntake.setStopping(hold);
+  conveyor.setStopping(hold);
 
   while(true)
   {
@@ -48,69 +53,62 @@ int main()
     fRightDrive.spin(forward, speedR, percent);
     bRightDrive.spin(forward, speedR, percent);
 
-    //lift
+    //conveyor w/ autosorter
+    if(Controller1.ButtonA.pressing() && !hasTrash)
+    {
+      conveyor.spin(forward, conveyorSpeed, percent); //intake
+      trashHandler.spin(forward, conveyorSpeed, percent); //trash handler helps lift this ball
+    }
+    else if(Controller1.ButtonB.pressing())
+    {
+      conveyor.spin(forward, -conveyorSpeed, percent); //outtake
+      trashHandler.spin(forward, -conveyorSpeed, percent); //trash handler helps spit out this ball
+    }
+    else if(Controller1.ButtonA.pressing() && hasTrash)
+    {
+      conveyor.spin(forward, conveyorSpeed, percent); //intake
+      trashHandler.spin(forward, -conveyorSpeed, percent); //trash is had, spit out ball
+    }
+
+    //don't let either system block each other.
+    if(!Controller1.ButtonA.pressing() && !Controller1.ButtonB.pressing() && !Controller1.ButtonUp.pressing() && !Controller1.ButtonDown.pressing() && !!Controller1.ButtonRight.pressing())
+    {
+      conveyor.stop(); //stay still
+      trashHandler.stop();
+    }
+
+    //conveyor w/o autosorter
     if(Controller1.ButtonUp.pressing())
     {
-      lift.spin(forward, 50, percent); //go up
+      conveyor.spin(forward, conveyorSpeed, percent);
+      trashHandler.spin(forward, conveyorSpeed, percent);
     }
     else if(Controller1.ButtonDown.pressing())
     {
-      lift.spin(forward, -50, percent); //go down
+      conveyor.spin(forward, conveyorSpeed, percent);
+      trashHandler.spin(forward, conveyorSpeed, percent);
     }
-    else
+    else if(Controller1.ButtonRight.pressing())
     {
-      lift.stop(); //stay still
+      conveyor.spin(forward, conveyorSpeed, percent);
+      trashHandler.spin(forward, conveyorSpeed, percent);
     }
 
     //blinkake and brinkake
     if(Controller1.ButtonL1.pressing())
     {
-      bLinkake.spin(forward, 50, percent); //inkake
-      bRinkake.spin(forward, 50, percent);
+      lIntake.spin(forward, 50, percent); //inkake
+      rIntake.spin(forward, 50, percent);
     }
     else if(Controller1.ButtonL2.pressing())
     {
-      bLinkake.spin(forward, -50, percent); //outkake
-      bRinkake.spin(forward, -50, percent);
+      lIntake.spin(forward, -50, percent); //outkake
+      rIntake.spin(forward, -50, percent);
     }
     else
     {
-      bLinkake.stop();
-      bRinkake.stop();
-    }
-
-    //ramp intake
-    if(Controller1.ButtonR1.pressing())
-    {
-      rampIntake.spin(forward, 50, percent);
-    }
-    else if(Controller1.ButtonR2.pressing())
-    {
-      rampIntake.spin(forward, -50, percent);
-    }
-    else
-    {
-      rampIntake.stop();
-    }
-
-    //All of the above
-    if(Controller1.ButtonA.pressing())
-    {
-      rampIntake.spin(forward, 50, percent);
-      bLinkake.spin(forward, 50, percent);
-      bRinkake.spin(forward, 50, percent);
-    }
-    else if(Controller1.ButtonB.pressing())
-    {
-      rampIntake.spin(forward, -50, percent);
-      bLinkake.spin(forward, -50, percent);
-      bRinkake.spin(forward, -50, percent);
-    }
-    else
-    {
-      rampIntake.stop();
-      bLinkake.stop();
-      bRinkake.stop();
+      lIntake.stop();
+      rIntake.stop();
     }
   }  
 }
