@@ -21,6 +21,7 @@ motor rIntake = motor(PORT16, ratio18_1, true);
 vision sight = vision (PORT17, 50);
 /*vex-vision-config:end*/
 inertial Accella = inertial(PORT18);
+optical eyes = optical(PORT9);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
