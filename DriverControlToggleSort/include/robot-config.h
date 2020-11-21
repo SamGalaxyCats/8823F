@@ -23,6 +23,7 @@ extern signature sight__SIG_6;
 extern signature sight__SIG_7;
 extern vision sight;
 extern inertial Accella;
+extern optical eyes;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
