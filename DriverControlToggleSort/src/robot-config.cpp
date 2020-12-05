@@ -9,7 +9,7 @@ brain  Brain;
 
 // VEXcode device constructors
 motor fLeftDrive = motor(PORT1, ratio18_1, false);
-motor fRightDrive = motor(PORT10, ratio18_1, true);
+motor fRightDrive = motor(PORT9, ratio18_1, true);
 motor bLeftDrive = motor(PORT11, ratio18_1, false);
 motor bRightDrive = motor(PORT20, ratio18_1, true);
 controller Controller1 = controller(primary);
@@ -21,7 +21,7 @@ motor rIntake = motor(PORT16, ratio18_1, true);
 vision sight = vision (PORT17, 50);
 /*vex-vision-config:end*/
 inertial Accella = inertial(PORT18);
-optical eyes = optical(PORT9);
+optical eyes = optical(PORT12);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
