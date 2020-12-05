@@ -1,19 +1,3 @@
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// fLeftDrive           motor         1               
-// fRightDrive          motor         10              
-// bLeftDrive           motor         11              
-// bRightDrive          motor         20              
-// Controller1          controller                    
-// trashHandler         motor         5               
-// conveyor             motor         4               
-// lIntake              motor         15              
-// rIntake              motor         16              
-// sight                vision        17              
-// Accella              inertial      18              
-// eyes                 optical       9               
-// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -114,6 +98,7 @@ int main()
   double conveyorSpeed = 90;
 
   bool hasTrash = false;
+  int redLimit = 50;
   
   trashHandler.setStopping(hold);
   lIntake.setStopping(hold);
@@ -130,21 +115,32 @@ int main()
     fRightDrive.spin(forward, speedR, percent);
     bRightDrive.spin(forward, speedR, percent);
 
+    //trash check
+    if(eyes.hue() < redLimit)
+    {
+      hasTrash = true;
+    }
+    else
+    {
+      hasTrash = false;
+    }
+    printf("\n%f", eyes.hue());
+
     //conveyor w/ autosorter
-    if((Controller1.ButtonR1.pressing() && !hasTrash) || Controller1.ButtonA.pressing())
+    if((Controller1.ButtonR1.pressing() && !hasTrash) || Controller1.ButtonUp.pressing())
     {
       conveyor.spin(forward, conveyorSpeed, percent); //intake
-      trashHandler.spin(forward, conveyorSpeed, percent); //trash handler helps lift this ball
+      trashHandler.spin(forward, -conveyorSpeed, percent); //trash handler helps lift this ball
     }
     else if(Controller1.ButtonR2.pressing())
     {
       conveyor.spin(forward, -conveyorSpeed, percent); //outtake
       trashHandler.spin(forward, -conveyorSpeed, percent); //trash handler helps spit out this ball
     }
-    else if((Controller1.ButtonR1.pressing() && hasTrash) || Controller1.ButtonY.pressing())
+    else if((Controller1.ButtonR1.pressing() && hasTrash) || Controller1.ButtonRight.pressing())
     {
       conveyor.spin(forward, conveyorSpeed, percent); //intake
-      trashHandler.spin(forward, -conveyorSpeed, percent); //trash is had, spit out ball
+      trashHandler.spin(forward, conveyorSpeed, percent); //trash is had, spit out ball
     }
     else
     {
