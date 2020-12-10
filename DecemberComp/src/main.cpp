@@ -110,7 +110,7 @@ int main() {
   bool hasTrash = false;
   int redLimit = 50;
 
-  double speedReducer = 1.5;
+  double speedReducer = 1;
   Controller1.Screen.clearScreen();
   Controller1.Screen.setCursor(1, 1);
   Controller1.Screen.print("You got this! :D");
