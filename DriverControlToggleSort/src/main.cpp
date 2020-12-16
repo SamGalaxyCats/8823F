@@ -1,67 +1,3 @@
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// bLeftDrive           motor         11              
-// bRightDrive          motor         20              
-// Controller1          controller                    
-// trashHandler         motor         5               
-// conveyor             motor         3               
-// lIntake              motor         15              
-// rIntake              motor         16              
-// Accella              inertial      18              
-// eyes                 optical       12              
-// dist                 distance      6               
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// bLeftDrive           motor         11              
-// bRightDrive          motor         20              
-// Controller1          controller                    
-// trashHandler         motor         5               
-// conveyor             motor         3               
-// lIntake              motor         15              
-// rIntake              motor         16              
-// sight                vision        17              
-// Accella              inertial      18              
-// eyes                 optical       12              
-// dist                 distance      6               
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// bLeftDrive           motor         11              
-// bRightDrive          motor         20              
-// Controller1          controller                    
-// trashHandler         motor         5               
-// conveyor             motor         3               
-// lIntake              motor         15              
-// rIntake              motor         16              
-// sight                vision        17              
-// Accella              inertial      18              
-// eyes                 optical       12              
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// conveyor             motor         3              
-// fLeftDrive           motor         1              
-// fRightDrive          motor         9              
-// bLeftDrive           motor         11             
-// bRightDrive          motor         19             
-// trashHandler         motor         5              
-// lIntake              motor         15             
-// rIntake              motor         16             
-// Controller1          controller                   
-// eyes                 optical       12             
-// ---- END VEXCODE CONFIGURED DEVICES ----
- 
 #include "vex.h"
 #include "function-library.h"
 using namespace vex;
@@ -78,27 +14,6 @@ int statusCheck()
   }
   return 1;
 };
-
-/*int sort()
-{
-  BackgroundTask handleTrash;
-  while(1)
-  {
-    if(eyes.isNearObject())
-    {
-      if(handleTrash.isTrash(true))
-      {
-        hasTrash = true;
-      }
-      else
-      {
-        hasTrash = false;
-      }
-    }
-    vex::task::sleep(10000000);
-  }
-  return 1;
-}*/
 
 int main()
 {
@@ -117,7 +32,10 @@ int main()
   hasTrash = false;
   int redLimit = 50;
   double objectRange = 5;
+  ConveyorSystem autoSorter;
   eyes.setLightPower(10, percent);
+  conveyor.setStopping(brake);
+  trashHandler.setStopping(brake);
 
   //Controller setup
   Controller1.Screen.clearScreen();
@@ -175,33 +93,29 @@ int main()
     }
 
     //conveyor w/ autosorter
-    if((Controller1.ButtonUp.pressing() && !hasTrash) || Controller1.ButtonR1.pressing())
+    if((Controller1.ButtonUp.pressing() && !hasTrash) || Controller1.ButtonL1.pressing())
     {
-      conveyor.spin(forward, conveyorSpeed, percent); //intake
-      trashHandler.spin(forward, -conveyorSpeed, percent); //trash handler helps lift this ball
+      autoSorter.takeUp(conveyorSpeed);
     }
     else if(Controller1.ButtonDown.pressing())
     {
-      conveyor.spin(forward, -conveyorSpeed, percent); //outtake
-      trashHandler.spin(forward, conveyorSpeed, percent); //trash handler helps spit out this ball
+      autoSorter.takeDown(conveyorSpeed);
     }
-    else if((Controller1.ButtonUp.pressing() && hasTrash) || Controller1.ButtonR2.pressing())
+    else if((Controller1.ButtonUp.pressing() && hasTrash) || Controller1.ButtonL2.pressing())
     {
-      conveyor.spin(forward, conveyorSpeed, percent); //intake
-      trashHandler.spin(forward, conveyorSpeed, percent); //trash is had, spit out ball
+      autoSorter.spitOut(conveyorSpeed);
     }
     else
     {
-      conveyor.stop();
-      trashHandler.stop();
+      autoSorter.stopConveyor();
     }
      //intakes
-    if(Controller1.ButtonL1.pressing())
+    if(Controller1.ButtonR1.pressing())
     {
       lIntake.spin(forward, 75, percent); //inkake
       rIntake.spin(forward, 75, percent);
     }
-    else if(Controller1.ButtonL2.pressing())
+    else if(Controller1.ButtonR2.pressing())
     {
       lIntake.spin(forward, -75, percent); //outkake
       rIntake.spin(forward, -75, percent);
