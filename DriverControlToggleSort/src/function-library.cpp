@@ -64,3 +64,51 @@ bool BackgroundTask::isTrash(bool redTrash)
 {
   return true;
 }
+
+void ConveyorSystem::autoSort(bool redTrash, double objectRange, double redThreshhold, double systemSpeed)
+{
+  if(dist.objectDistance(inches) < objectRange)
+  {
+    eyes.setLight(ledState::on);
+    if((eyes.hue() <= redThreshhold) && redTrash)
+    {
+      spitOut(systemSpeed);
+    }
+    else if((eyes.hue() > redThreshhold) && !redTrash)
+    {
+      spitOut(systemSpeed);
+    }
+    else
+    {
+      takeUp(systemSpeed);
+    }
+  }
+  else
+  {
+    eyes.setLight(ledState::off);
+  }
+}
+
+void ConveyorSystem::spitOut(double systemSpeed)
+{
+  conveyor.spin(forward, systemSpeed, percent); //intake
+  trashHandler.spin(forward, systemSpeed, percent); //trash is had, spit out ball
+}
+
+void ConveyorSystem::takeUp(double systemSpeed)
+{
+  conveyor.spin(forward, systemSpeed, percent); //intake
+  trashHandler.spin(forward, -systemSpeed, percent); //trash handler helps lift this ball
+}
+
+void ConveyorSystem::stopConveyor()
+{
+  conveyor.stop();
+  trashHandler.stop();
+}
+
+void ConveyorSystem::takeDown(double systemSpeed)
+{
+  conveyor.spin(forward, -systemSpeed, percent); //outtake
+  trashHandler.spin(forward, systemSpeed, percent); //trash handler helps spit out this ball
+}
