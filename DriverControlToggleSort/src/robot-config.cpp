@@ -11,7 +11,7 @@ brain  Brain;
 motor fLeftDrive = motor(PORT1, ratio18_1, false);
 motor fRightDrive = motor(PORT9, ratio18_1, true);
 motor bLeftDrive = motor(PORT11, ratio18_1, false);
-motor bRightDrive = motor(PORT20, ratio18_1, true);
+motor bRightDrive = motor(PORT19, ratio18_1, true);
 controller Controller1 = controller(primary);
 motor trashHandler = motor(PORT5, ratio6_1, true);
 motor conveyor = motor(PORT3, ratio6_1, false);
@@ -19,7 +19,7 @@ motor lIntake = motor(PORT15, ratio18_1, false);
 motor rIntake = motor(PORT16, ratio18_1, true);
 inertial Accella = inertial(PORT18);
 optical eyes = optical(PORT12);
-distance dist = distance(PORT6);
+distance dist = distance(PORT13);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
