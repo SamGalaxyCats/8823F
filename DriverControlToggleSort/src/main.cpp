@@ -1,8 +1,23 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// fLeftDrive           motor         1               
+// fRightDrive          motor         9               
+// bLeftDrive           motor         11              
+// bRightDrive          motor         19              
+// Controller1          controller                    
+// trashHandler         motor         5               
+// conveyor             motor         3               
+// lIntake              motor         15              
+// rIntake              motor         16              
+// Accella              inertial      18              
+// eyes                 optical       12              
+// dist                 distance      13              
+// ---- END VEXCODE CONFIGURED DEVICES ----
 #include "vex.h"
 #include "function-library.h"
 using namespace vex;
 
-bool hasTrash = false;
 
 int statusCheck()
 {
@@ -10,7 +25,8 @@ int statusCheck()
   while(true)
   {
     status.heatCheck();
-    vex::task::sleep(25000); //check the heat of the motors once every 25 seconds
+    printf("BR: %f \nBL: %f\nFR %f\nFL %f\n", bRightDrive.position(degrees), bLeftDrive.position(degrees), fRightDrive.position(degrees), fLeftDrive.position(degrees));
+    vex::task::sleep(10000); //check the heat of the motors once every 25 seconds
   }
   return 1;
 };
@@ -29,11 +45,12 @@ int main()
 
   //conveyor vars
   double conveyorSpeed = 90;
-  hasTrash = false;
-  int redLimit = 50;
-  double objectRange = 5;
+  bool hadTrash = false;
+  int redLimit = 55;
+  double objectRange = 6;
+  bool trashFound = false;
   ConveyorSystem autoSorter;
-  eyes.setLightPower(10, percent);
+  //eyes.setLightPower(10, percent);
   conveyor.setStopping(brake);
   trashHandler.setStopping(brake);
 
@@ -75,25 +92,10 @@ int main()
     }
  
     //trash check
-    if(dist.objectDistance(inches) < objectRange) //if something is close enough to be an object,...
-    {
-      eyes.setLight(ledState::on); //reduce ambience-induced misreads
-      if(eyes.hue() < redLimit) //...and you detect red,...
-      {
-        hasTrash = true; //you have trash.
-      }
-      else //If that something isn't red,...
-      {
-        hasTrash = false; //...it's blue, and it's not trash.
-      }
-    }
-    else //If there's nothing near,...
-    {
-      eyes.setLight(ledState::off); //...turn the light off to prevent overheating.
-    }
+    trashFound = autoSorter.hasTrash(true, objectRange, redLimit, hadTrash);
 
     //conveyor w/ autosorter
-    if((Controller1.ButtonUp.pressing() && !hasTrash) || Controller1.ButtonL1.pressing())
+    if(Controller1.ButtonL1.pressing())
     {
       autoSorter.takeUp(conveyorSpeed);
     }
@@ -101,9 +103,15 @@ int main()
     {
       autoSorter.takeDown(conveyorSpeed);
     }
-    else if((Controller1.ButtonUp.pressing() && hasTrash) || Controller1.ButtonL2.pressing())
+    else if(Controller1.ButtonL2.pressing())
     {
       autoSorter.spitOut(conveyorSpeed);
+    }
+    else if(Controller1.ButtonUp.pressing())
+    {
+      autoSorter.autoSort(trashFound, conveyorSpeed);
+      Controller1.Screen.setCursor(3, 1);
+      Controller1.Screen.print(eyes.hue());
     }
     else
     {
