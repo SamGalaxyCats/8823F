@@ -65,27 +65,44 @@ bool BackgroundTask::isTrash(bool redTrash)
   return true;
 }
 
-void ConveyorSystem::autoSort(bool redTrash, double objectRange, double redThreshhold, double systemSpeed)
+bool ConveyorSystem::hasTrash(bool redTrash, double objectRange, double redTreshhold, bool currentState)
 {
   if(dist.objectDistance(inches) < objectRange)
   {
-    eyes.setLight(ledState::on);
-    if((eyes.hue() <= redThreshhold) && redTrash)
+    //eyes.setLightPower(10, percent);
+    //eyes.setLight(ledState::on);
+    if((eyes.hue() <= redTreshhold) && redTrash)
     {
-      spitOut(systemSpeed);
+      hadTrash = true;
+      return true;
     }
-    else if((eyes.hue() > redThreshhold) && !redTrash)
+    else if((eyes.hue() > redTreshhold) && !redTrash)
     {
-      spitOut(systemSpeed);
+      hadTrash = true;
+      return true;
     }
     else
     {
-      takeUp(systemSpeed);
+      hadTrash = false;
+      return false;
     }
   }
   else
   {
-    eyes.setLight(ledState::off);
+    //eyes.setLight(ledState::off);
+    return hadTrash;
+  }
+}
+
+void ConveyorSystem::autoSort(bool foundTrash, double systemSpeed)
+{
+  if(foundTrash)
+  {
+    spitOut(systemSpeed);
+  }
+  else
+  {
+    takeUp(systemSpeed);
   }
 }
 
