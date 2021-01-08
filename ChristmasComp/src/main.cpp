@@ -47,7 +47,7 @@ void pre_auton(void)
 {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  eyes.setLightPower(10, percent);
+  eyes.setLightPower(0, percent);
   conveyor.setStopping(brake);
   trashHandler.setStopping(brake);
 
@@ -157,13 +157,13 @@ void usercontrol(void)
      //intakes
     if(Controller1.ButtonR1.pressing())
     {
-      lIntake.spin(forward, 75, percent); //inkake
-      rIntake.spin(forward, 75, percent);
+      lIntake.spin(forward, 85, percent); //inkake
+      rIntake.spin(forward, 85, percent);
     }
     else if(Controller1.ButtonR2.pressing())
     {
-      lIntake.spin(forward, -75, percent); //outkake
-      rIntake.spin(forward, -75, percent);
+      lIntake.spin(forward, -85, percent); //outkake
+      rIntake.spin(forward, -85, percent);
     }
     else
     {
