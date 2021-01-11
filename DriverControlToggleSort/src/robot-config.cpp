@@ -20,6 +20,8 @@ motor rIntake = motor(PORT16, ratio18_1, true);
 inertial Accella = inertial(PORT18);
 optical eyes = optical(PORT12);
 distance dist = distance(PORT13);
+limit clickL = limit(Brain.ThreeWirePort.A);
+limit clickR = limit(Brain.ThreeWirePort.B);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
