@@ -13,7 +13,10 @@
 // Accella              inertial      18              
 // eyes                 optical       12              
 // dist                 distance      13              
+// clickL               limit         A               
+// clickR               limit         B               
 // ---- END VEXCODE CONFIGURED DEVICES ----
+
 #include "vex.h"
 #include "function-library.h"
 using namespace vex;
@@ -46,7 +49,8 @@ int main()
   //conveyor vars
   double conveyorSpeed = 90;
   bool hadTrash = false;
-  int redLimit = 55;
+  int redLimit = 70;
+  bool redTrash = false;
   double objectRange = 6;
   bool trashFound = false;
   ConveyorSystem autoSorter;
@@ -90,9 +94,6 @@ int main()
       speedL = (Controller1.Axis3.position(percent));
       speedR = (Controller1.Axis2.position(percent));
     }
- 
-    //trash check
-    trashFound = autoSorter.hasTrash(true, objectRange, redLimit, hadTrash);
 
     //conveyor w/ autosorter
     if(Controller1.ButtonL1.pressing())
@@ -109,9 +110,10 @@ int main()
     }
     else if(Controller1.ButtonUp.pressing())
     {
+      //If autosort button is pressed, run the autoSort method.
       autoSorter.autoSort(trashFound, conveyorSpeed);
-      Controller1.Screen.setCursor(3, 1);
-      Controller1.Screen.print(eyes.hue());
+      Controller1.Screen.setCursor(2, 1);
+      Controller1.Screen.print("Trash = %d", trashFound);
     }
     else
     {
@@ -133,7 +135,11 @@ int main()
       lIntake.stop();
       rIntake.stop();
     }
-    wait(20, msec);
+
+    //trash check every time you run through the loop
+    autoSorter.update(redTrash, redLimit, objectRange);
+    trashFound = autoSorter.hasTrash(redTrash, objectRange, redLimit, hadTrash);
+    vex::task::sleep(20);
   }
 }
  
