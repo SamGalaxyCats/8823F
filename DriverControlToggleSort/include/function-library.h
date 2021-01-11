@@ -8,6 +8,21 @@ class BackgroundTask
     bool isTrash(bool redTrash);
 };
 
+class Ball
+{
+  public:
+    bool isRed;
+    bool isLocked;
+    void lockColor(bool wasRed);
+    void unlockColor();
+
+    Ball()
+    {
+      isRed = false;
+      isLocked = false;
+    }
+};
+
 class ConveyorSystem
 {
   public:
@@ -17,11 +32,20 @@ class ConveyorSystem
     void takeDown(double systemSpeed);
     void autoSort(bool foundTrash, double systemSpeed);
     void stopConveyor();
+    void lockIntakeBall();
+    void lockConveyorBall();
+    void update(bool redTrash, double redTreshhold, double objectRange);
     bool hadTrash;
+    bool hadRed;
+    Ball conveyorBall;
+    Ball intakeBall;
 
     ConveyorSystem()
     {
       hadTrash = false;
+      hadRed = false;
+      Ball conveyorBall;
+      Ball intakeBall;
     }
 };
 
