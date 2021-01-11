@@ -15,6 +15,8 @@ extern motor rIntake;
 extern inertial Accella;
 extern optical eyes;
 extern distance dist;
+extern limit clickL;
+extern limit clickR;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
