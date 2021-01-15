@@ -211,6 +211,7 @@ void ConveyorSystem::update(bool redTrash, double redTreshhold, double objectRan
 void ConveyorSystem::handleEntry()
 {
   //Don't run this without an intake ball!
+  printf("handling entry\n");
   if(!intakeBall.inQueue)
   {
     return;
@@ -245,6 +246,7 @@ void ConveyorSystem::handleEntry()
 
 void ConveyorSystem::handleExit()
 {
+  printf("handling exit\n");
   lastBall.isRed = ballToProcess.isRed;
   if(nextBall.inQueue)
   {
@@ -267,6 +269,7 @@ void ConveyorSystem::handleExit()
 
 void ConveyorSystem::handleReentry()
 {
+  printf("handling reentry\n");
   if(afterNextBall.inQueue)
   {
     afterNextBall.inQueue = false;
@@ -290,6 +293,7 @@ void ConveyorSystem::handleReentry()
 
 void ConveyorSystem::handleUnqueue()
 {
+  printf("handling unqueue\n");
   if(afterNextBall.inQueue)
   {
     afterNextBall.inQueue = false;
