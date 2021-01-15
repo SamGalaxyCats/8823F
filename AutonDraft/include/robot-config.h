@@ -15,6 +15,7 @@ extern optical eyes;
 extern distance dist;
 extern limit clicker;
 extern inertial accella;
+extern controller Controller1;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
