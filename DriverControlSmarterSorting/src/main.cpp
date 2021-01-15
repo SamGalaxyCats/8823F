@@ -13,8 +13,7 @@
 // Accella              inertial      18              
 // eyes                 optical       12              
 // dist                 distance      13              
-// clickL               limit         A               
-// clickR               limit         B               
+// clickL               limit         B               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -28,7 +27,8 @@ int statusCheck()
   while(true)
   {
     status.heatCheck();
-    printf("BR: %f \nBL: %f\nFR %f\nFL %f\n", bRightDrive.position(degrees), bLeftDrive.position(degrees), fRightDrive.position(degrees), fLeftDrive.position(degrees));
+    printf("\n");
+    //printf("BR: %f \nBL: %f\nFR %f\nFL %f\n", bRightDrive.position(degrees), bLeftDrive.position(degrees), fRightDrive.position(degrees), fLeftDrive.position(degrees));
     vex::task::sleep(10000); //check the heat of the motors once every 25 seconds
   }
   return 1;
@@ -49,7 +49,7 @@ int main()
   //conveyor vars
   double conveyorSpeed = 90;
   //bool hadTrash = false;
-  int redLimit = 70;
+  int redLimit = 60;
   bool redTrash = false;
   double objectRange = 6;
   bool trashFound = false;
@@ -96,19 +96,19 @@ int main()
     }
 
     //conveyor w/ autosorter
-    if(Controller1.ButtonL1.pressing())
+    if(Controller1.ButtonUp.pressing())
     {
       autoSorter.takeUp(conveyorSpeed);
     }
-    else if(Controller1.ButtonDown.pressing())
+    else if(Controller1.ButtonL2.pressing())
     {
       autoSorter.takeDown(conveyorSpeed);
     }
-    else if(Controller1.ButtonL2.pressing())
+    else if(Controller1.ButtonDown.pressing())
     {
       autoSorter.spitOut(conveyorSpeed);
     }
-    else if(Controller1.ButtonUp.pressing())
+    else if(Controller1.ButtonL1.pressing())
     {
       //If autosort button is pressed, run the autoSort method.
       autoSorter.autoSort(conveyorSpeed, redTrash);
@@ -141,7 +141,7 @@ int main()
     //trash check every time you run through the loop
     autoSorter.update(redTrash, redLimit, objectRange);
     //trashFound = autoSorter.hasTrash(redTrash, objectRange, redLimit, hadTrash);
-    vex::task::sleep(20);
+    vex::task::sleep(10);
   }
 }
  
