@@ -146,7 +146,7 @@ int main()
   fRightDrive.stop();
   bRightDrive.stop();
   conveyor.spin(forward, 80, percent);
-  trashHandler.spin(forward, -80, percent);  
+  trashHandler.spin(forward, 80, percent);  
   vex::task::sleep(1300);
   conveyor.stop();
   trashHandler.stop();
