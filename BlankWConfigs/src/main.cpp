@@ -20,8 +20,8 @@
 // trashHandler         motor         5               
 // eyes                 optical       12              
 // dist                 distance      13              
-// clicker              limit         A               
-// accella              inertial      20              
+// clickL               limit         B               
+// accella              inertial      18              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
