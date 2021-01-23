@@ -13,7 +13,7 @@ extern motor conveyor;
 extern motor trashHandler;
 extern optical eyes;
 extern distance dist;
-extern limit clicker;
+extern limit clickL;
 extern inertial accella;
 
 /**
