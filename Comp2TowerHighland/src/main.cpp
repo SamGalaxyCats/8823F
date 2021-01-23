@@ -158,7 +158,7 @@ void autonomous(void)
   }
   
   //drive into ball and tower.
-  target = 900;
+  target = 915;
   rIntake.spin(forward, 90, percent);
   lIntake.spin(forward, 90, percent);
   bRightDrive.setPosition(0, degrees);
