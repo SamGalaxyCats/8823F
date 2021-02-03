@@ -9,6 +9,7 @@ class Robot
     void driveDistance(double ticks, double degreesPerSecond, bool waitForComplete, bool doCoast);
     void turnDegrees(double degrees, double degreesPerSecond);
     void turnDegrees(double degrees, double degreesPerSecond, bool doCoast);
+    void turnUnevenDegrees(double degrees, double speedL, double speedR);
     void turnLeft(double degrees, double degreesPerSecond);
     void turnRight(double degrees, double degreesPerSecond);
     void turnDistance(double ticksL, double speedL, double ticksR, double speedR);
