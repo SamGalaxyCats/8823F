@@ -195,6 +195,8 @@ void Robot::turnDistance(double ticksL, double speedL, double ticksR, double spe
       vex::task::sleep(20);
     }
   }
+
+  printf("Pos: BL %f | FL %f | BR %f | FR %f\nFacing: %f\n", bLeftDrive.position(degrees), fLeftDrive.position(degrees), bRightDrive.position(degrees), fRightDrive.position(degrees), accella.rotation());
 }
 
 void Robot::turnDistance(double ticksL, double speedL, double ticksR, double speedR, bool waitForComplete, bool doCoast)
@@ -227,6 +229,8 @@ void Robot::turnDistance(double ticksL, double speedL, double ticksR, double spe
   fLeftDrive.setStopping(brake);
   bRightDrive.setStopping(brake);
   fRightDrive.setStopping(brake);
+    
+  printf("Pos: BL %f | FL %f | BR %f | FR %f\nFacing: %f\n", bLeftDrive.position(degrees), fLeftDrive.position(degrees), bRightDrive.position(degrees), fRightDrive.position(degrees), accella.rotation());
 }
 
 /*                                                                                                         *|
