@@ -45,7 +45,7 @@ int main()
   //This is our exact current auton, but using the new and improved methods.
 
   //Prep to score side tower
-  driveSystem.turnDistance(-250, -180, 0, 0);
+  driveSystem.turnDistance(0, 0, -250, -180);
 
   //run conveyor
   conveyor.spin(forward, 90, percent);
