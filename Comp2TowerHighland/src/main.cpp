@@ -268,13 +268,13 @@ void usercontrol(void)
      //intakes
     if(Controller1.ButtonR1.pressing())
     {
-      lIntake.spin(forward, 85, percent); //inkake
-      rIntake.spin(forward, 85, percent);
+      lIntake.spin(forward, 50, percent); //inkake
+      rIntake.spin(forward, 50, percent);
     }
     else if(Controller1.ButtonR2.pressing())
     {
-      lIntake.spin(forward, -85, percent); //outkake
-      rIntake.spin(forward, -85, percent);
+      lIntake.spin(forward, -50, percent); //outkake
+      rIntake.spin(forward, -50, percent);
     }
     else
     {
