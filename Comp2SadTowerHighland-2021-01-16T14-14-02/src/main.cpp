@@ -211,6 +211,7 @@ void usercontrol(void)
   double speedL = 0;
   double speedR = 0;
   double speedReducer = 1;
+  double turnReducer = 0.65;
   bool tank = false;
 
   //conveyor vars
@@ -243,8 +244,8 @@ void usercontrol(void)
     }
     if(!tank)
     {
-      speedL = ((Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/speedReducer); //if the joysticks are wrong, switch the + and -.
-      speedR = ((Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/speedReducer);
+      speedL = ((Controller1.Axis3.position(percent) + (Controller1.Axis1.position(percent)) * turnReducer)/speedReducer); //if the joysticks are wrong, switch the + and -.
+      speedR = ((Controller1.Axis3.position(percent) - (Controller1.Axis1.position(percent)) * turnReducer)/speedReducer);
     }
     else
     {
