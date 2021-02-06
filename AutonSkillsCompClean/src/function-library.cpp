@@ -342,13 +342,13 @@ void Robot::scoreBall(double objectRange, double timeLimit)
     {
       ballFlag = true;
     }
-    if((Brain.Timer.value()-timeStamp) > 3)
+    if((Brain.Timer.value()-timeStamp) > timeLimit)
     {
       break;
     }
   }
   ballFlag = false;
-  vex::task::sleep(100);
+  vex::task::sleep(200);
   printf("Distance: %f\nTime: %f\n", dist.objectDistance(inches), Brain.Timer.value());
   conveyor.stop();
   trashHandler.stop();
