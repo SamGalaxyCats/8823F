@@ -59,7 +59,8 @@ void pre_auton(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
-void autonomous(void) {
+void autonomous(void) 
+{
   accella.calibrate();
 
   //Set up variables
@@ -81,7 +82,6 @@ void autonomous(void) {
   //double timeOffSet = Brain.Timer.value();
 
   //Prep to score side tower
-  //driveSystem.turnDistance(0, 0, -200, -180);
   driveSystem.turnOnlyRightBack(18.5, 200);
 
   //Flip ramp up
@@ -96,103 +96,89 @@ void autonomous(void) {
   lIntake.spin(forward, intakeSpeed, dps);
   driveSystem.driveDistance(1150, 900); //drive slightly past the original position of the ball to ensure it gets the ball.
   driveSystem.turnDegrees(-35, 300);//face tower
-  driveSystem.driveDistance(775, 900, 4); //drive to tower
+  driveSystem.driveDistance(770, 900, 4); //drive to tower
 
   //score corner ball  
   rIntake.stop();
   lIntake.stop();
   driveSystem.scoreBall(objectRange, 3);
-  
-  conveyor.stop();
-  trashHandler.stop();
-
+ 
+  //get out of the tower
   rIntake.spin(forward, -intakeSpeed/2, dps); //outtake, two balls are too risky.
   lIntake.spin(forward, -intakeSpeed/2, dps);
-  driveSystem.driveDistance(-400, 360);
+  driveSystem.driveDistance(-450, 450);
   rIntake.stop();
   lIntake.stop();
 
-  
-  driveSystem.turnDegrees(85, 360);
-  conveyor.spin(forward);
-  trashHandler.spin(forward, conveyorSpeed/2, dps); //spit out the two balls
+  //turn toward the next ball
+  driveSystem.turnDegrees(85, 450);
+  //conveyor.spin(forward);
+  //trashHandler.spin(forward, conveyorSpeed/2, dps); //spit out the two balls
 
+  //Get the next ball
   rIntake.spin(forward, intakeSpeed, dps);
   lIntake.spin(forward, intakeSpeed, dps);
   driveSystem.driveDistance(1800, 900);
   conveyor.stop();
   trashHandler.stop();
   vex::task::sleep(100);
+  
+  
+  //go to the left side tower and score the ball
+  driveSystem.turnDegrees(0, 360);
+  driveSystem.driveDistance(255, 720, 2);
   rIntake.stop();
   lIntake.stop();
-  
+  driveSystem.scoreBall(objectRange, 4);
 
-  driveSystem.turnDegrees(0, 360);
-  driveSystem.driveDistance(250, 720);
-
-  conveyor.spin(forward);
-  trashHandler.spin(forward);
-  timeStamp = Brain.Timer.value();
-  printf("Time: %f\n", timeStamp);
-  while(!ballFlag || (dist.objectDistance(inches) < objectRange))
+  //Recalibrate the inertial sensor.
+  accella.calibrate();
+  while(accella.isCalibrating())
   {
-    vex::task::sleep(10);
-    if(dist.objectDistance(inches) < objectRange)
-    {
-      ballFlag = true;
-    }
-    if((Brain.Timer.value()-timeStamp) > 4)
-    {
-      break;
-    }
+    vex::task::sleep(20);
   }
-  ballFlag = false;
-  vex::task::sleep(100);
-  conveyor.stop();
-  trashHandler.stop();
 
   //get out of the tower.
   rIntake.spin(forward, -intakeSpeed/2, dps); //outtake, we don't want that ball.
   lIntake.spin(forward, -intakeSpeed/2, dps);
-  driveSystem.driveDistance(-250, -450); //drive back the same amount you went in.
+  driveSystem.driveDistance(-255, -450); //drive back the same amount you went in.
   rIntake.stop();
   lIntake.stop();
 
   //get the next ball.
-  driveSystem.turnDegrees(85, 900); //face 90
+  driveSystem.turnDegrees(90, 900); //face 90
   rIntake.spin(forward, intakeSpeed, dps); //intake
   lIntake.spin(forward, intakeSpeed, dps);
   driveSystem.driveDistance(1600, 1000); //get ball
   
-  //go to tower
-  driveSystem.turnDegrees(55, 900);
+  //go to back corner tower
+  driveSystem.turnDegrees(60, 900);
   driveSystem.driveDistance(950, 720, 4);
   rIntake.stop();
   lIntake.stop();
 
-  conveyor.spin(forward);
-  trashHandler.spin(forward);
-  timeStamp = Brain.Timer.value();
-  printf("Time: %f\n", timeStamp);
-  while(!ballFlag || (dist.objectDistance(inches) < objectRange))
-  {
-    vex::task::sleep(10);
-    if(dist.objectDistance(inches) < objectRange)
-    {
-      ballFlag = true;
-    }
-    if((Brain.Timer.value()-timeStamp) > 3)
-    {
-      break;
-    }
-  }
-  ballFlag = false;
-  vex::task::sleep(200);
-  printf("Distance: %f\nTime: %f\n", dist.objectDistance(inches), Brain.Timer.value());
-  conveyor.stop();
-  trashHandler.stop();
+  //Score ball
+  driveSystem.scoreBall(objectRange, 3);
+
+  //back out of tower
+  rIntake.spin(forward, -intakeSpeed/2, dps);
+  lIntake.spin(forward, -intakeSpeed/2, dps);
+  driveSystem.driveDistance(-750, 720);
   rIntake.stop();
   lIntake.stop();
+
+  //get next ball
+  driveSystem.turnDegrees(190, 900);
+  rIntake.spin(forward, intakeSpeed, dps); //intake
+  lIntake.spin(forward, intakeSpeed, dps);
+  driveSystem.driveDistance(1650, 1200);
+  vex::task::sleep(100);
+  driveSystem.turnDegrees(115, 900);
+  driveSystem.driveDistance(1000, 1200, 3.75);
+  rIntake.stop();
+  lIntake.stop();
+  driveSystem.scoreBall(objectRange, 2);
+
 }
 
 /*---------------------------------------------------------------------------*/
