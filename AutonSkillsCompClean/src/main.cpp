@@ -84,12 +84,12 @@ void autonomous(void)
   //Prep to score side tower
   driveSystem.turnOnlyRightBack(18.5, 200);
 
-  //Flip ramp up
+  //Flip ramp up (1st tower)
   conveyor.spin(forward, 90, percent);
   vex::task::sleep(1000);
   conveyor.stop();
 
-  //Go get the nearest ball and score it.
+  //Go get the nearest ball and score it. (2nd tower)
   driveSystem.driveDistance(100, 180); //Drive a smidge forward
   driveSystem.turnDegrees(22.75, 300); //turn a little more
   rIntake.spin(forward, intakeSpeed, dps);
@@ -98,7 +98,7 @@ void autonomous(void)
   driveSystem.turnDegrees(-35, 300);//face tower
   driveSystem.driveDistance(770, 900, 4); //drive to tower
 
-  //score corner ball  
+  //score corner ball
   rIntake.stop();
   lIntake.stop();
   driveSystem.scoreBall(objectRange, 3);
@@ -110,7 +110,7 @@ void autonomous(void)
   rIntake.stop();
   lIntake.stop();
 
-  //turn toward the next ball
+  //turn toward the next ball (3rd tower)
   driveSystem.turnDegrees(85, 450);
   //conveyor.spin(forward);
   //trashHandler.spin(forward, conveyorSpeed/2, dps); //spit out the two balls
@@ -118,7 +118,7 @@ void autonomous(void)
   //Get the next ball
   rIntake.spin(forward, intakeSpeed, dps);
   lIntake.spin(forward, intakeSpeed, dps);
-  driveSystem.driveDistance(1800, 900);
+  driveSystem.driveDistance(1725, 900, 7);
   conveyor.stop();
   trashHandler.stop();
   vex::task::sleep(100);
@@ -145,8 +145,8 @@ void autonomous(void)
   rIntake.stop();
   lIntake.stop();
 
-  //get the next ball.
-  driveSystem.turnDegrees(90, 900); //face 90
+  //get the next ball. (4th tower)
+  driveSystem.turnDegrees(89, 900); //face 90
   rIntake.spin(forward, intakeSpeed, dps); //intake
   lIntake.spin(forward, intakeSpeed, dps);
   driveSystem.driveDistance(1600, 1000); //get ball
@@ -167,18 +167,61 @@ void autonomous(void)
   rIntake.stop();
   lIntake.stop();
 
-  //get next ball
-  driveSystem.turnDegrees(190, 900);
+  //get next ball for 5th tower
+  driveSystem.turnDegrees(190, 900); //face ball
   rIntake.spin(forward, intakeSpeed, dps); //intake
   lIntake.spin(forward, intakeSpeed, dps);
-  driveSystem.driveDistance(1650, 1200);
+  driveSystem.driveDistance(1700, 1200); //get ball
   vex::task::sleep(100);
-  driveSystem.turnDegrees(115, 900);
-  driveSystem.driveDistance(1000, 1200, 3.75);
+  driveSystem.turnDegrees(110, 850); //face tower
+  driveSystem.driveDistance(1150, 1000, 3.75); //go to tower
   rIntake.stop();
   lIntake.stop();
-  driveSystem.scoreBall(objectRange, 2);
+  driveSystem.scoreBall(objectRange, 2); //score
 
+  //Recalibrate at the 5th tower to ground the inertial sensor during 6 & 7
+  accella.calibrate();
+  while(accella.isCalibrating())
+  {
+    vex::task::sleep(20);
+  }
+  
+  //back out of tower
+  rIntake.spin(forward, -intakeSpeed/2, dps);
+  lIntake.spin(forward, -intakeSpeed/2, dps);
+  driveSystem.driveDistance(-1000, 720);
+
+  //Get next ball (6th tower)
+  printf("\n5th tower done, backed out\n");
+  printf("Pos: BL %f | FL %f | BR %f | FR %f\nFacing: %f\n", bLeftDrive.position(degrees), fLeftDrive.position(degrees), bRightDrive.position(degrees), fRightDrive.position(degrees), accella.rotation());
+  driveSystem.turnDegrees(47, 600);
+  rIntake.spin(forward, intakeSpeed, dps); //intake
+  lIntake.spin(forward, intakeSpeed, dps);
+  driveSystem.driveDistance(2300, 1200, 3); //get the ball and go to the tower in the same breath
+  rIntake.stop();
+  lIntake.stop();
+  driveSystem.scoreBall(objectRange, 3);
+
+  //Back out
+  rIntake.spin(forward, -intakeSpeed/2, dps);
+  lIntake.spin(forward, -intakeSpeed/2, dps);
+  driveSystem.driveDistance(-500, 450);
+  rIntake.stop();
+  lIntake.stop();
+
+  //Turn to face next ball (7th tower)
+  driveSystem.turnDegrees(184, 720);
+  rIntake.spin(forward, intakeSpeed, dps); //intake
+  lIntake.spin(forward, intakeSpeed, dps);
+  driveSystem.driveDistance(2200, 1200); //get ball
+  vex::task::sleep(100);
+  driveSystem.turnDegrees(260, 600);
+  rIntake.stop();
+  lIntake.stop();
+  driveSystem.driveDistance(800, 1200, 1.5);
+  double currentDeg = accella.rotation();
+  driveSystem.turnOnlyRightBack(currentDeg + 2.5, 200);
+  driveSystem.scoreBall(6, 3);
 }
 
 /*---------------------------------------------------------------------------*/
