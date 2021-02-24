@@ -111,7 +111,7 @@ void autonomous(void)
   lIntake.stop();
 
   //turn toward the next ball (3rd tower)
-  driveSystem.turnDegrees(85, 450);
+  driveSystem.turnDegrees(86.5, 450);
   //conveyor.spin(forward);
   //trashHandler.spin(forward, conveyorSpeed/2, dps); //spit out the two balls
 
@@ -146,13 +146,13 @@ void autonomous(void)
   lIntake.stop();
 
   //get the next ball. (4th tower)
-  driveSystem.turnDegrees(89, 900); //face 90
+  driveSystem.turnDegrees(90.5, 900); //face 90
   rIntake.spin(forward, intakeSpeed, dps); //intake
   lIntake.spin(forward, intakeSpeed, dps);
   driveSystem.driveDistance(1600, 1000); //get ball
   
   //go to back corner tower
-  driveSystem.turnDegrees(60, 900);
+  driveSystem.turnDegrees(62, 900);
   driveSystem.driveDistance(950, 720, 4);
   rIntake.stop();
   lIntake.stop();
@@ -163,18 +163,18 @@ void autonomous(void)
   //back out of tower
   rIntake.spin(forward, -intakeSpeed/2, dps);
   lIntake.spin(forward, -intakeSpeed/2, dps);
-  driveSystem.driveDistance(-750, 720);
+  driveSystem.driveDistance(-725, 720);
   rIntake.stop();
   lIntake.stop();
 
   //get next ball for 5th tower
-  driveSystem.turnDegrees(190, 900); //face ball
+  driveSystem.turnDegrees(195, 900); //face ball
   rIntake.spin(forward, intakeSpeed, dps); //intake
   lIntake.spin(forward, intakeSpeed, dps);
-  driveSystem.driveDistance(1700, 1200); //get ball
+  driveSystem.driveDistance(1725, 1200); //get ball
   vex::task::sleep(100);
   driveSystem.turnDegrees(110, 850); //face tower
-  driveSystem.driveDistance(1150, 1000, 3.75); //go to tower
+  driveSystem.driveDistance(1165, 1000, 3.75); //go to tower
   rIntake.stop();
   lIntake.stop();
   driveSystem.scoreBall(objectRange, 2); //score
@@ -189,15 +189,15 @@ void autonomous(void)
   //back out of tower
   rIntake.spin(forward, -intakeSpeed/2, dps);
   lIntake.spin(forward, -intakeSpeed/2, dps);
-  driveSystem.driveDistance(-1000, 720);
+  driveSystem.driveDistance(-1100, 720);
 
   //Get next ball (6th tower)
   printf("\n5th tower done, backed out\n");
   printf("Pos: BL %f | FL %f | BR %f | FR %f\nFacing: %f\n", bLeftDrive.position(degrees), fLeftDrive.position(degrees), bRightDrive.position(degrees), fRightDrive.position(degrees), accella.rotation());
-  driveSystem.turnDegrees(47, 600);
+  driveSystem.turnDegrees(46.5, 600);
   rIntake.spin(forward, intakeSpeed, dps); //intake
   lIntake.spin(forward, intakeSpeed, dps);
-  driveSystem.driveDistance(2300, 1200, 3); //get the ball and go to the tower in the same breath
+  driveSystem.driveDistance(2350, 1200, 3); //get the ball and go to the tower in the same breath
   rIntake.stop();
   lIntake.stop();
   driveSystem.scoreBall(objectRange, 3);
@@ -210,17 +210,17 @@ void autonomous(void)
   lIntake.stop();
 
   //Turn to face next ball (7th tower)
-  driveSystem.turnDegrees(184, 720);
+  driveSystem.turnDegrees(192.5, 720);
   rIntake.spin(forward, intakeSpeed, dps); //intake
   lIntake.spin(forward, intakeSpeed, dps);
-  driveSystem.driveDistance(2200, 1200); //get ball
+  driveSystem.driveDistance(2215, 1200); //get ball
   vex::task::sleep(100);
-  driveSystem.turnDegrees(260, 600);
+  driveSystem.turnDegrees(261, 600);
   rIntake.stop();
   lIntake.stop();
-  driveSystem.driveDistance(800, 1200, 1.5);
+  driveSystem.driveDistance(900, 1200, 1.5);
   double currentDeg = accella.rotation();
-  driveSystem.turnOnlyRightBack(currentDeg + 2.5, 200);
+  driveSystem.turnOnlyRightBack(currentDeg + 7, 200);
   driveSystem.scoreBall(6, 3);
 }
 
