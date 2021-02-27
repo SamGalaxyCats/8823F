@@ -1,3 +1,19 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// fLeftDrive           motor         1               
+// fRightDrive          motor         9               
+// bLeftDrive           motor         11              
+// bRightDrive          motor         19              
+// lIntake              motor         15              
+// rIntake              motor         14              
+// conveyor             motor         3               
+// trashHandler         motor         5               
+// eyes                 optical       12              
+// dist                 distance      6               
+// accella              inertial      18              
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
