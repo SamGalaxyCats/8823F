@@ -1,3 +1,16 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// bLeftDrive           motor         11              
+// bRightDrive          motor         19              
+// fLeftDrive           motor         1               
+// fRightDrive          motor         9               
+// lIntake              motor         15              
+// rIntake              motor         14              
+// conveyL              motor         3               
+// conveyR              motor         5               
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -91,7 +104,7 @@ void usercontrol(void)
   double turnReducer = 0.65;
   double conveyorSpeed = 525;
 
-  Controller1.Screen.print("Good Luck! :)");
+  Controller1.Screen.print(".......7......! :)");
   // User control code here, inside the loop
   while (1) 
   {
