@@ -11,6 +11,19 @@
 // conveyL              motor         3               
 // conveyR              motor         5               
 // ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// bLeftDrive           motor         11              
+// bRightDrive          motor         19              
+// fLeftDrive           motor         1               
+// fRightDrive          motor         9               
+// lIntake              motor         15              
+// rIntake              motor         14              
+// conveyL              motor         3               
+// conveyR              motor         5               
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -58,6 +71,8 @@ void pre_auton(void) {
   vexcodeInit();
   rIntake.setBrake(brake);
   lIntake.setBrake(brake);
+  conveyL.setBrake(brake);
+  conveyR.setBrake(brake);
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 }
@@ -104,7 +119,7 @@ void usercontrol(void)
   double turnReducer = 0.65;
   double conveyorSpeed = 525;
 
-  Controller1.Screen.print(".......7......! :)");
+  Controller1.Screen.print("20, 10, 8, 4, 16 are dead ports! :)");
   // User control code here, inside the loop
   while (1) 
   {
