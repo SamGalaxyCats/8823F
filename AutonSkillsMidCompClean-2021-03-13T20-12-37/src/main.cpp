@@ -13,111 +13,6 @@
 // accella              inertial      18              
 // Controller1          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// bLeftDrive           motor         11              
-// bRightDrive          motor         19              
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// lIntake              motor         15              
-// rIntake              motor         14              
-// conveyL              motor         3               
-// trashHandler         motor         5               
-// dist                 distance      13              
-// accella              inertial      18              
-// Controller1          controller                    
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// bLeftDrive           motor         11              
-// bRightDrive          motor         19              
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// lIntake              motor         15              
-// rIntake              motor         14              
-// conveyor             motor         3               
-// trashHandler         motor         5               
-// dist                 distance      13              
-// accella              inertial      18              
-// Controller1          controller                    
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// bLeftDrive           motor         11              
-// bRightDrive          motor         19              
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// lIntake              motor         15              
-// rIntake              motor         14              
-// conveyor             motor         3               
-// trashHandler         motor         5               
-// dist                 distance      13              
-// accella              inertial      18              
-// Controller1          controller                    
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// bLeftDrive           motor         11              
-// bRightDrive          motor         19              
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// lIntake              motor         15              
-// rIntake              motor         14              
-// conveyor             motor         3               
-// trashHandler         motor         5               
-// dist                 distance      13              
-// accella              inertial      18              
-// Controller1          controller                    
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// bLeftDrive           motor         11              
-// bRightDrive          motor         19              
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// lIntake              motor         15              
-// rIntake              motor         14              
-// conveyor             motor         3               
-// trashHandler         motor         5               
-// dist                 distance      13              
-// accella              inertial      18              
-// Controller1          controller                    
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// bLeftDrive           motor         11              
-// bRightDrive          motor         19              
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// lIntake              motor         15              
-// rIntake              motor         14              
-// conveyor             motor         3               
-// trashHandler         motor         5               
-// dist                 distance      13              
-// accella              inertial      18              
-// Controller1          controller                    
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// bLeftDrive           motor         11              
-// bRightDrive          motor         19              
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// lIntake              motor         15              
-// rIntake              motor         14              
-// conveyor             motor         3               
-// trashHandler         motor         5               
-// dist                 distance      13              
-// accella              inertial      18              
-// Controller1          controller                    
-// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -126,22 +21,6 @@
 /*    Description:  Competition Template                                      */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
-
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// bLeftDrive           motor         11              
-// bRightDrive          motor         19              
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// lIntake              motor         15              
-// rIntake              motor         14              
-// conveyor             motor         3               
-// trashHandler         motor         5               
-// dist                 distance      13              
-// accella              inertial      18              
-// ---- END VEXCODE CONFIGURED DEVICES ----
-
 #include "vex.h"
 #include "function-library.h"
 using namespace vex;
