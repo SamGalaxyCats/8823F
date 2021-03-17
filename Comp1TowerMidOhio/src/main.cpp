@@ -11,19 +11,6 @@
 // conveyL              motor         3               
 // conveyR              motor         5               
 // ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// bLeftDrive           motor         11              
-// bRightDrive          motor         19              
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// lIntake              motor         15              
-// rIntake              motor         14              
-// conveyL              motor         3               
-// conveyR              motor         5               
-// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -33,19 +20,7 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// bLeftDrive           motor         11              
-// bRightDrive          motor         19              
-// fLeftDrive           motor         1               
-// fRightDrive          motor         9               
-// lIntake              motor         15              
-// rIntake              motor         14              
-// conveyL              motor         3               
-// conveyR              motor         5               
-// ---- END VEXCODE CONFIGURED DEVICES ----
+
 
 #include "vex.h"
 
@@ -124,8 +99,8 @@ void usercontrol(void)
   while (1) 
   {
     //RC Control
-    speedL = ((Controller1.Axis3.position(percent) + (Controller1.Axis1.position(percent)) * turnReducer)/speedReducer); //if the joysticks are wrong, switch the + and -.
-    speedR = ((Controller1.Axis3.position(percent) - (Controller1.Axis1.position(percent)) * turnReducer)/speedReducer);
+    speedL = ((Controller1.Axis3.position(percent) + (Controller1.Axis1.position(percent) * turnReducer))/speedReducer); //if the joysticks are wrong, switch the + and -.
+    speedR = ((Controller1.Axis3.position(percent) - (Controller1.Axis1.position(percent) * turnReducer))/speedReducer);
 
     bLeftDrive.spin(forward, speedL, percent);
     fLeftDrive.spin(forward, speedL, percent);
