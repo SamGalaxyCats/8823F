@@ -69,7 +69,7 @@ void autonomous(void)
   rIntake.spin(forward, -90, percent);
   conveyL.spin(forward, 90, percent);
   conveyR.spin(forward, 90, percent);
-  vex::task::sleep(1000);
+  vex::task::sleep(2000);
   conveyL.stop();
   conveyR.stop();
   lIntake.stop();
@@ -92,16 +92,29 @@ void usercontrol(void)
   double speedR = 0;
   double speedReducer = 1;
   double turnReducer = 0.65;
+  double precisionModifier = 0.3;
+  double regularModifier = 0.65;
   double conveyorSpeed = 525;
+  double intakeSpeed = 540;
 
   Controller1.Screen.print("20, 10, 8, 4, 16 are dead ports! :)");
   // User control code here, inside the loop
   while (1) 
   {
+    //Precision turning
+    if((Controller1.Axis1.position(percent) < 30) && (Controller1.Axis1.position(percent) > -30))
+    {
+      turnReducer = precisionModifier;
+    }
+    else
+    {
+      turnReducer = regularModifier;
+    }
+
     //RC Control
     speedL = ((Controller1.Axis3.position(percent) + (Controller1.Axis1.position(percent) * turnReducer))/speedReducer); //if the joysticks are wrong, switch the + and -.
     speedR = ((Controller1.Axis3.position(percent) - (Controller1.Axis1.position(percent) * turnReducer))/speedReducer);
-
+    
     bLeftDrive.spin(forward, speedL, percent);
     fLeftDrive.spin(forward, speedL, percent);
     fRightDrive.spin(forward, speedR, percent);
@@ -110,13 +123,13 @@ void usercontrol(void)
     //Intakes
     if(Controller1.ButtonR1.pressing())
     {
-      lIntake.spin(forward, 540, rpm); //intake
-      rIntake.spin(forward, 540, rpm);
+      lIntake.spin(forward, intakeSpeed, rpm); //intake
+      rIntake.spin(forward, intakeSpeed, rpm);
     }
     else if(Controller1.ButtonR2.pressing())
     {
-      lIntake.spin(forward, -540, rpm); //outtake
-      rIntake.spin(forward, -540, rpm);
+      lIntake.spin(forward, -intakeSpeed, rpm); //outtake
+      rIntake.spin(forward, -intakeSpeed, rpm);
     }
     else
     {
