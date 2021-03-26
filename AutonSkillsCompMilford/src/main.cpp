@@ -108,19 +108,23 @@ void autonomous(void)
   conveyR.stop();
 
   //get ANOTHER ball
-  driveSystem.turnDegrees(30, 200);
-  driveSystem.driveDistance(900, 900);
+  driveSystem.turnDegrees(30, 175);
+  driveSystem.driveDistance(850, 850);
 
 
   //Go to 2nd tower and score ball
   driveSystem.turnDegrees(-80, 300);
-  driveSystem.driveDistance(800, 500, 2);
+  driveSystem.driveDistance(750, 500, 2);
   lIntake.stop();
   rIntake.stop();
   driveSystem.score2Balls(6, 3);
 
   //back out
+  lIntake.spin(forward, -270, rpm);
+  rIntake.spin(forward, -270, rpm);
   driveSystem.driveDistance(-250, 300);
+  lIntake.stop();
+  rIntake.stop();
 }
 
 /*---------------------------------------------------------------------------*/
