@@ -102,7 +102,7 @@ void usercontrol(void)
   while (1) 
   {
     //Precision turning
-    if((Controller1.Axis1.position(percent) < 30) && (Controller1.Axis1.position(percent) > -30))
+    if((Controller1.Axis3.position(percent) < 30) && (Controller1.Axis3.position(percent) > -30))
     {
       turnReducer = precisionModifier;
     }
