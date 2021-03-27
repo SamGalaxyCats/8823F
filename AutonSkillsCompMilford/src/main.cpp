@@ -79,6 +79,7 @@ void pre_auton(void)
 void autonomous(void) 
 {
   Robot driveSystem;
+  double intakeSpeed = 540;
   printf("Run start\n");
   while(accella.isCalibrating())
   {
@@ -98,12 +99,12 @@ void autonomous(void)
   rIntake.stop();
 
   //Turn to next ball
-  lIntake.spin(forward, 540, rpm);
-  rIntake.spin(forward, 540, rpm);
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
   driveSystem.driveDistance(500, 800);
-  conveyL.spin(forward, 300, rpm);
-  conveyR.spin(forward, 300, rpm);
-  vex::task::sleep(500);
+  conveyL.spin(forward, 350, rpm);
+  conveyR.spin(forward, 350, rpm);
+  vex::task::sleep(750);
   conveyL.stop();
   conveyR.stop();
 
@@ -122,9 +123,72 @@ void autonomous(void)
   //back out
   lIntake.spin(forward, -270, rpm);
   rIntake.spin(forward, -270, rpm);
-  driveSystem.driveDistance(-250, 300);
+  driveSystem.driveDistance(-200, 300);
   lIntake.stop();
   rIntake.stop();
+
+  //go for 3rd tower
+  driveSystem.turnDegrees(-13, 300); //turn to face next ball
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.driveDistance(900, 800); //get ball
+  driveSystem.turnDegrees(-30, 400); //face tower
+  lIntake.stop();
+  rIntake.stop();
+  driveSystem.driveDistance(700, 600, 2);
+  driveSystem.scoreBall(6, 2);
+
+  //back out
+  lIntake.spin(forward, -intakeSpeed/4, rpm);
+  rIntake.spin(forward, -intakeSpeed/4, rpm);
+  driveSystem.driveDistance(-400, 600);
+  lIntake.stop();
+  rIntake.stop();
+
+  //4th tower
+  driveSystem.turnDegrees(80, 300);
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.driveDistance(1000, 800); //get ball
+  lIntake.stop();
+  rIntake.stop();
+  driveSystem.turnDegrees(15, 300);
+  driveSystem.driveDistance(300, 600, 2);
+  driveSystem.scoreBall(6, 2);
+
+  //5th tower
+  lIntake.spin(forward, -intakeSpeed/4, rpm);
+  rIntake.spin(forward, -intakeSpeed/4, rpm);
+  driveSystem.driveDistance(-225, 300); //back out
+  lIntake.stop();
+  rIntake.stop();
+
+  driveSystem.turnDegrees(90, 300);
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.driveDistance(1000, 700); //get ball
+  driveSystem.turnDegrees(45, 300);
+  lIntake.stop();
+  rIntake.stop();
+  driveSystem.driveDistance(600, 600, 3);
+  driveSystem.scoreBall(6, 2);
+
+  //6th tower
+  lIntake.spin(forward, -intakeSpeed/4, rpm);
+  rIntake.spin(forward, -intakeSpeed/4, rpm);
+  driveSystem.driveDistance(-400, 600); //back out
+  lIntake.stop();
+  rIntake.stop();
+
+  driveSystem.turnDegrees(200, 300);
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.driveDistance(1250, 1000); //get ball
+  driveSystem.turnDegrees(100, 300); //face tower
+  lIntake.stop();
+  rIntake.stop();
+  driveSystem.driveDistance(1000, 800, 3);
+  driveSystem.scoreBall(6, 2);
 }
 
 /*---------------------------------------------------------------------------*/
