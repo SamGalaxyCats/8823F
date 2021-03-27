@@ -12,6 +12,7 @@
 //don't have to worry about slight discrepancies in motor rotations having a large overall effect.
 void Robot::driveDistance(double ticks, double degreesPerSecond)
 {
+  printf("Pre-Drive Facing: %f\n", accella.rotation());
   bLeftDrive.spinFor(forward, ticks, degrees, degreesPerSecond, dps, false);
   fLeftDrive.spinFor(forward, ticks, degrees, degreesPerSecond, dps, false);
   bRightDrive.spinFor(forward, ticks, degrees, degreesPerSecond, dps, false);
@@ -27,6 +28,7 @@ void Robot::driveDistance(double ticks, double degreesPerSecond)
 //Drive ticks at degreesPerSecond dps with a time limit, so that the robot can't get stuck.
 void Robot::driveDistance(double ticks, double degreesPerSecond, double timeLimit)
 {
+  printf("Pre-Drive Facing: %f\n", accella.rotation());
   bLeftDrive.spinFor(forward, ticks, degrees, degreesPerSecond, dps, false);
   fLeftDrive.spinFor(forward, ticks, degrees, degreesPerSecond, dps, false);
   bRightDrive.spinFor(forward, ticks, degrees, degreesPerSecond, dps, false);
