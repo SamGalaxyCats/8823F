@@ -348,7 +348,7 @@ void Robot::scoreBall(double objectRange, double timeLimit)
   conveyL.spin(forward);
   conveyR.spin(forward);
   double timeStamp = Brain.Timer.value();
-  printf("Time: %f\n", timeStamp);
+  //printf("Time: %f\n", timeStamp);
   while(!ballFlag || (dist.objectDistance(inches) < objectRange))
   {
     vex::task::sleep(10);
@@ -363,7 +363,34 @@ void Robot::scoreBall(double objectRange, double timeLimit)
   }
   ballFlag = false;
   vex::task::sleep(200);
-  printf("Distance: %f\nTime: %f\n", dist.objectDistance(inches), Brain.Timer.value());
+  //printf("Distance: %f\nTime: %f\n", dist.objectDistance(inches), Brain.Timer.value());
+  conveyL.stop();
+  conveyR.stop();
+}
+
+//scoreBall but with variable time spent at the tower after you've scored the ball.
+void Robot::scoreBall(double objectRange, double timeLimit, double bufferTime)
+{
+  bool ballFlag = false;
+  conveyL.spin(forward);
+  conveyR.spin(forward);
+  double timeStamp = Brain.Timer.value();
+  //printf("Time: %f\n", timeStamp);
+  while(!ballFlag || (dist.objectDistance(inches) < objectRange))
+  {
+    vex::task::sleep(10);
+    if(dist.objectDistance(inches) < objectRange)
+    {
+      ballFlag = true;
+    }
+    if((Brain.Timer.value()-timeStamp) > timeLimit)
+    {
+      break;
+    }
+  }
+  ballFlag = false;
+  vex::task::sleep(bufferTime);
+  //printf("Distance: %f\nTime: %f\n", dist.objectDistance(inches), Brain.Timer.value());
   conveyL.stop();
   conveyR.stop();
 }
@@ -375,7 +402,7 @@ void Robot::score2Balls(double objectRange, double timeLimit)
   conveyL.spin(forward);
   conveyR.spin(forward);
   double timeStamp = Brain.Timer.value();
-  printf("Time: %f\n", timeStamp);
+  //printf("Time: %f\n", timeStamp);
   while(!ballFlag || (dist.objectDistance(inches) < objectRange))
   {
     vex::task::sleep(10);
@@ -403,7 +430,7 @@ void Robot::score2Balls(double objectRange, double timeLimit)
   }
   ballFlag = false;
   vex::task::sleep(200);
-  printf("Distance: %f\nTime: %f\n", dist.objectDistance(inches), Brain.Timer.value());
+  //printf("Distance: %f\nTime: %f\n", dist.objectDistance(inches), Brain.Timer.value());
   conveyL.stop();
   conveyR.stop();
 }
