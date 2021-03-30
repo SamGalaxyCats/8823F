@@ -97,98 +97,147 @@ void autonomous(void)
   conveyR.stop();
   lIntake.stop();
   rIntake.stop();
+  printf("\n2nd tower\n");
 
   //Turn to next ball
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
-  driveSystem.driveDistance(500, 800);
-  conveyL.spin(forward, 350, rpm);
-  conveyR.spin(forward, 350, rpm);
-  vex::task::sleep(750);
+  driveSystem.driveDistance(500, 600);
+  conveyL.spin(forward, 300, rpm);
+  conveyR.spin(forward, 300, rpm);
+  vex::task::sleep(250);
   conveyL.stop();
   conveyR.stop();
 
   //get ANOTHER ball
-  driveSystem.turnDegrees(30, 175);
-  driveSystem.driveDistance(850, 850);
-
+  driveSystem.turnDegrees(34, 150);
+  driveSystem.driveDistance(850, 600);
+  conveyL.spin(forward, 300, rpm);
+  conveyR.spin(forward, 300, rpm);
+  vex::task::sleep(400);
+  conveyL.stop();
+  conveyR.stop();
 
   //Go to 2nd tower and score ball
-  driveSystem.turnDegrees(-80, 300);
+  driveSystem.turnDegrees(-78, 300);
   driveSystem.driveDistance(750, 500, 2);
   lIntake.stop();
   rIntake.stop();
   driveSystem.score2Balls(6, 3);
 
   //back out
-  lIntake.spin(forward, -270, rpm);
-  rIntake.spin(forward, -270, rpm);
+  lIntake.spin(forward, -intakeSpeed/2, rpm);
+  rIntake.spin(forward, -intakeSpeed/2, rpm);
   driveSystem.driveDistance(-200, 300);
   lIntake.stop();
   rIntake.stop();
 
   //go for 3rd tower
+  printf("\n3rd tower\n");
   driveSystem.turnDegrees(-13, 300); //turn to face next ball
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
-  driveSystem.driveDistance(900, 800); //get ball
-  driveSystem.turnDegrees(-30, 400); //face tower
+  driveSystem.driveDistance(950, 600); //get ball
+  driveSystem.turnDegrees(-35, 300); //face tower
+  driveSystem.driveDistance(400, 400, 1.5);
   lIntake.stop();
   rIntake.stop();
-  driveSystem.driveDistance(700, 600, 2);
+  driveSystem.scoreBall(6, 2, 300);
+
+  //back out
+  lIntake.spin(forward, -intakeSpeed/4, rpm);
+  rIntake.spin(forward, -intakeSpeed/4, rpm);
+  driveSystem.driveDistance(-325, 600);
+  lIntake.stop();
+  rIntake.stop();
+
+  //4th tower
+  printf("\n4th tower\n");
+  driveSystem.turnDegrees(80, 250);
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.driveDistance(1100, 600); //get ball
+  driveSystem.turnDegrees(10, 300);
+  driveSystem.driveDistance(300, 600, 2); //go to tower
+  lIntake.stop();
+  rIntake.stop();
+  driveSystem.scoreBall(6, 2, 300);
+
+  //back out
+  lIntake.spin(forward, -intakeSpeed/4, rpm);
+  rIntake.spin(forward, -intakeSpeed/4, rpm);
+  driveSystem.driveDistance(-225, 300); 
+  lIntake.stop();
+  rIntake.stop();
+
+  //5th tower
+  printf("\n5th tower\n");
+  driveSystem.turnDegrees(95, 300);
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.driveDistance(1000, 600); //get ball
+  driveSystem.turnDegrees(45, 300);
+  driveSystem.driveDistance(600, 600, 3); //go to tower
+  lIntake.stop();
+  rIntake.stop();
   driveSystem.scoreBall(6, 2);
 
   //back out
   lIntake.spin(forward, -intakeSpeed/4, rpm);
   rIntake.spin(forward, -intakeSpeed/4, rpm);
-  driveSystem.driveDistance(-400, 600);
+  driveSystem.driveDistance(-400, 600); 
   lIntake.stop();
   rIntake.stop();
-
-  //4th tower
-  driveSystem.turnDegrees(80, 300);
-  lIntake.spin(forward, intakeSpeed, rpm);
-  rIntake.spin(forward, intakeSpeed, rpm);
-  driveSystem.driveDistance(1000, 800); //get ball
-  lIntake.stop();
-  rIntake.stop();
-  driveSystem.turnDegrees(15, 300);
-  driveSystem.driveDistance(300, 600, 2);
-  driveSystem.scoreBall(6, 2);
-
-  //5th tower
-  lIntake.spin(forward, -intakeSpeed/4, rpm);
-  rIntake.spin(forward, -intakeSpeed/4, rpm);
-  driveSystem.driveDistance(-225, 300); //back out
-  lIntake.stop();
-  rIntake.stop();
-
-  driveSystem.turnDegrees(90, 300);
-  lIntake.spin(forward, intakeSpeed, rpm);
-  rIntake.spin(forward, intakeSpeed, rpm);
-  driveSystem.driveDistance(1000, 700); //get ball
-  driveSystem.turnDegrees(45, 300);
-  lIntake.stop();
-  rIntake.stop();
-  driveSystem.driveDistance(600, 600, 3);
-  driveSystem.scoreBall(6, 2);
 
   //6th tower
-  lIntake.spin(forward, -intakeSpeed/4, rpm);
-  rIntake.spin(forward, -intakeSpeed/4, rpm);
-  driveSystem.driveDistance(-400, 600); //back out
-  lIntake.stop();
-  rIntake.stop();
-
+  printf("\n6th tower\n");
   driveSystem.turnDegrees(200, 300);
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
-  driveSystem.driveDistance(1250, 1000); //get ball
-  driveSystem.turnDegrees(100, 300); //face tower
+  driveSystem.driveDistance(1100, 600); //get ball
+  driveSystem.turnDegrees(98, 300); //face tower
+  driveSystem.driveDistance(700, 600, 2);
   lIntake.stop();
   rIntake.stop();
-  driveSystem.driveDistance(1000, 800, 3);
   driveSystem.scoreBall(6, 2);
+
+  //back out
+  lIntake.spin(forward, -intakeSpeed/2, rpm);
+  rIntake.spin(forward, -intakeSpeed/2, rpm);
+  driveSystem.driveDistance(-200, 300); //back out
+  lIntake.stop();
+  rIntake.stop();
+
+  //7th tower
+  printf("\n7th tower\n");
+  driveSystem.turnDegrees(185, 300); //turn to face next ball
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.driveDistance(900, 600); //get ball
+  driveSystem.turnDegrees(140, 300); //face tower
+  driveSystem.driveDistance(450, 400, 1.5);
+  lIntake.stop();
+  rIntake.stop();
+  driveSystem.scoreBall(6, 2, 300);
+
+  //back out
+  lIntake.spin(forward, -intakeSpeed/4, rpm);
+  rIntake.spin(forward, -intakeSpeed/4, rpm);
+  driveSystem.driveDistance(-325, 600);
+  lIntake.stop();
+  rIntake.stop();
+
+  //8th tower
+  printf("\n8th tower\n");
+  driveSystem.turnDegrees(260, 250);
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.driveDistance(1100, 600); //get ball
+  driveSystem.turnDegrees(190, 300);
+  driveSystem.driveDistance(300, 400, 2); //go to tower
+  lIntake.stop();
+  rIntake.stop();
+  driveSystem.scoreBall(6, 2, 300);
 }
 
 /*---------------------------------------------------------------------------*/
