@@ -94,6 +94,11 @@ void autonomous(void)
   lIntake.stop();
   rIntake.stop();
   driveSystem.scoreBall(6, 2);
+  lIntake.spin(forward, -intakeSpeed/2, rpm);
+  rIntake.spin(forward, -intakeSpeed/2, rpm);
+  driveSystem.driveDistance(-250, 300);
+  lIntake.stop();
+  rIntake.stop();
 }
 
 /*---------------------------------------------------------------------------*/
