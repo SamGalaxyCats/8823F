@@ -19,6 +19,7 @@ class Robot
     void turnDistance(double ticksL, double speedL, double ticksR, double speedR, bool waitForComplete);
     void turnDistance(double ticksL, double speedL, double ticksR, double speedR, bool waitForComplete, bool doCoast);
     void scoreBall(double objectRange, double timeLimit);
+    void scoreBall(double objectRange, double timeLimit, double bufferTime);
     void score2Balls(double objectRange, double timeLimit);
 };
 
