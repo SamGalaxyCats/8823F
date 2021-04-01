@@ -7,6 +7,7 @@ class Robot
     void driveDistance(double ticks, double degreesPerSecond);
     void driveDistance(double ticks, double degreesPerSecond, bool waitForComplete, bool doCoast);
     void driveDistance(double ticks, double degreesPerSecond, double timeLimit);
+    void backOut(double intakeSpeed, double degreesPerSecond, double ticks);
     void turnDegrees(double degreees, double degreesPerSecond);
     void turnDegrees(double degreees, double degreesPerSecond, bool doCoast);
     void turnLeft(double degreees, double degreesPerSecond);
