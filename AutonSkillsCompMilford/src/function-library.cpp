@@ -80,6 +80,22 @@ void Robot::driveDistance(double ticks, double degreesPerSecond, bool waitForCom
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*\
 |*^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^*|
 |*                                                                                                         */
+//back out functions.  Used for getting out of towers once you're in one.
+void Robot::backOut(double intakeSpeed, double degreesPerSecond, double ticks)
+{
+  lIntake.spin(forward, -intakeSpeed/2, rpm);
+  rIntake.spin(forward, -intakeSpeed/2, rpm);
+  driveDistance(ticks, degreesPerSecond);
+  lIntake.stop();
+  rIntake.stop();
+}
+/*                                                                                                         *|
+|*v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v*|
+\*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*\
+|*^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^*|
+|*                                                                                                         */
 //turnDegrees methods
 //This family of methods uses the inertial sensor to turn in place to face an exact rotation.
 
