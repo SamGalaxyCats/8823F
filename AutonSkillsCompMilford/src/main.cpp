@@ -134,7 +134,7 @@ void autonomous(void)
 
   //go for 3rd tower
   printf("\n3rd tower\n");
-  driveSystem.turnDegrees(-13, 300); //turn to face next ball
+  driveSystem.turnDegrees(-10, 300); //turn to face next ball
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
   driveSystem.driveDistance(950, 600); //get ball
@@ -153,10 +153,10 @@ void autonomous(void)
 
   //4th tower
   printf("\n4th tower\n");
-  driveSystem.turnDegrees(80, 250);
+  driveSystem.turnDegrees(81, 250);
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
-  driveSystem.driveDistance(1100, 600); //get ball
+  driveSystem.driveDistance(1050, 600); //get ball
   driveSystem.turnDegrees(10, 300);
   driveSystem.driveDistance(300, 600, 2); //go to tower
   lIntake.stop();
@@ -176,7 +176,7 @@ void autonomous(void)
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
   driveSystem.driveDistance(1000, 600); //get ball
-  driveSystem.turnDegrees(45, 300);
+  driveSystem.turnDegrees(43, 300);
   driveSystem.driveDistance(600, 600, 3); //go to tower
   lIntake.stop();
   rIntake.stop();
@@ -194,9 +194,9 @@ void autonomous(void)
   driveSystem.turnDegrees(200, 300);
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
-  driveSystem.driveDistance(1100, 600); //get ball
-  driveSystem.turnDegrees(98, 300); //face tower
-  driveSystem.driveDistance(700, 600, 2);
+  driveSystem.driveDistance(1250, 600); //get ball
+  driveSystem.turnDegrees(91, 300); //face tower
+  driveSystem.driveDistance(850, 600, 2);
   lIntake.stop();
   rIntake.stop();
   driveSystem.scoreBall(6, 2);
@@ -204,18 +204,18 @@ void autonomous(void)
   //back out
   lIntake.spin(forward, -intakeSpeed/2, rpm);
   rIntake.spin(forward, -intakeSpeed/2, rpm);
-  driveSystem.driveDistance(-200, 300); //back out
+  driveSystem.driveDistance(-175, 300); //back out
   lIntake.stop();
   rIntake.stop();
 
   //7th tower
   printf("\n7th tower\n");
-  driveSystem.turnDegrees(185, 300); //turn to face next ball
+  driveSystem.turnDegrees(170, 300); //turn to face next ball
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
   driveSystem.driveDistance(900, 600); //get ball
   driveSystem.turnDegrees(140, 300); //face tower
-  driveSystem.driveDistance(450, 400, 1.5);
+  driveSystem.driveDistance(500, 400, 2);
   lIntake.stop();
   rIntake.stop();
   driveSystem.scoreBall(6, 2, 300);
@@ -223,21 +223,44 @@ void autonomous(void)
   //back out
   lIntake.spin(forward, -intakeSpeed/4, rpm);
   rIntake.spin(forward, -intakeSpeed/4, rpm);
-  driveSystem.driveDistance(-325, 600);
+  driveSystem.driveDistance(-300, 575);
   lIntake.stop();
   rIntake.stop();
 
   //8th tower
   printf("\n8th tower\n");
-  driveSystem.turnDegrees(260, 250);
+  driveSystem.turnDegrees(266, 250);
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
   driveSystem.driveDistance(1100, 600); //get ball
   driveSystem.turnDegrees(190, 300);
-  driveSystem.driveDistance(300, 400, 2); //go to tower
+  driveSystem.driveDistance(250, 400, 1.5); //go to tower
   lIntake.stop();
   rIntake.stop();
   driveSystem.scoreBall(6, 2, 300);
+
+  //The fabled 9th tower
+  printf("\n9th tower\n");
+  driveSystem.backOut(intakeSpeed, 300, -250); //back out
+  driveSystem.turnDegrees(6, 300); //face ball
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.driveDistance(500, 600); //get ball
+  conveyL.spin(forward); //pull the ball up
+  conveyR.spin(forward); //that way we can outtake later.
+  vex::task::sleep(400);
+  conveyL.stop();
+  conveyR.stop();
+
+  //Poke out
+  driveSystem.turnDegrees(-5, 150); //face tower
+  lIntake.spin(forward, -intakeSpeed, rpm); //outtake to ensure that we poke out
+  rIntake.spin(forward, -intakeSpeed, rpm);
+  driveSystem.driveDistance(500, 600, 2); //get to the tower
+  lIntake.spin(forward, intakeSpeed, rpm);
+  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.scoreBall(6, 2); //Try to score the ball for 2 seconds
+  driveSystem.backOut(intakeSpeed, 300, -300); //get outta dodge
 }
 
 /*---------------------------------------------------------------------------*/
