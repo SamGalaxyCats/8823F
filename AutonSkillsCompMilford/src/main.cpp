@@ -78,6 +78,7 @@ void pre_auton(void)
 
 void autonomous(void) 
 {
+  //Subtle reminder to go back to Comp3Confusing and fix it.
   Robot driveSystem;
   double intakeSpeed = 540;
   printf("Run start\n");
@@ -87,7 +88,7 @@ void autonomous(void)
   }
 
   //Score 1st tower
-  driveSystem.turnOnlyRightBack(20, 300);
+  driveSystem.turnOnlyRightBack(21.5, 300);
   lIntake.spin(forward, -90, percent);
   rIntake.spin(forward, -90, percent);
   conveyL.spin(forward, 90, percent);
@@ -105,16 +106,16 @@ void autonomous(void)
   driveSystem.driveDistance(500, 600);
   conveyL.spin(forward, 300, rpm);
   conveyR.spin(forward, 300, rpm);
-  vex::task::sleep(250);
+  vex::task::sleep(300);
   conveyL.stop();
   conveyR.stop();
 
   //get ANOTHER ball
-  driveSystem.turnDegrees(34, 150);
+  driveSystem.turnDegrees(36.5, 150);
   driveSystem.driveDistance(850, 600);
   conveyL.spin(forward, 300, rpm);
   conveyR.spin(forward, 300, rpm);
-  vex::task::sleep(400);
+  vex::task::sleep(300);
   conveyL.stop();
   conveyR.stop();
 
@@ -134,7 +135,7 @@ void autonomous(void)
 
   //go for 3rd tower
   printf("\n3rd tower\n");
-  driveSystem.turnDegrees(-10, 300); //turn to face next ball
+  driveSystem.turnDegrees(-11, 300); //turn to face next ball
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
   driveSystem.driveDistance(950, 600); //get ball
@@ -147,7 +148,7 @@ void autonomous(void)
   //back out
   lIntake.spin(forward, -intakeSpeed/4, rpm);
   rIntake.spin(forward, -intakeSpeed/4, rpm);
-  driveSystem.driveDistance(-325, 600);
+  driveSystem.driveDistance(-350, 600);
   lIntake.stop();
   rIntake.stop();
 
@@ -172,11 +173,11 @@ void autonomous(void)
 
   //5th tower
   printf("\n5th tower\n");
-  driveSystem.turnDegrees(95, 300);
+  driveSystem.turnDegrees(93, 300); //face ball
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
   driveSystem.driveDistance(1000, 600); //get ball
-  driveSystem.turnDegrees(43, 300);
+  driveSystem.turnDegrees(44, 300); //face tower
   driveSystem.driveDistance(600, 600, 3); //go to tower
   lIntake.stop();
   rIntake.stop();
@@ -194,8 +195,8 @@ void autonomous(void)
   driveSystem.turnDegrees(200, 300);
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
-  driveSystem.driveDistance(1250, 600); //get ball
-  driveSystem.turnDegrees(91, 300); //face tower
+  driveSystem.driveDistance(1300, 600); //get ball
+  driveSystem.turnDegrees(90, 300); //face tower
   driveSystem.driveDistance(850, 600, 2);
   lIntake.stop();
   rIntake.stop();
@@ -210,12 +211,12 @@ void autonomous(void)
 
   //7th tower
   printf("\n7th tower\n");
-  driveSystem.turnDegrees(170, 300); //turn to face next ball
+  driveSystem.turnDegrees(167, 300); //turn to face next ball
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
-  driveSystem.driveDistance(900, 600); //get ball
+  driveSystem.driveDistance(975, 650); //get ball
   driveSystem.turnDegrees(140, 300); //face tower
-  driveSystem.driveDistance(500, 400, 2);
+  driveSystem.driveDistance(500, 400, 1.5);
   lIntake.stop();
   rIntake.stop();
   driveSystem.scoreBall(6, 2, 300);
@@ -229,10 +230,10 @@ void autonomous(void)
 
   //8th tower
   printf("\n8th tower\n");
-  driveSystem.turnDegrees(266, 250);
+  driveSystem.turnDegrees(262, 300);
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
-  driveSystem.driveDistance(1100, 600); //get ball
+  driveSystem.driveDistance(1125, 600); //get ball
   driveSystem.turnDegrees(190, 300);
   driveSystem.driveDistance(250, 400, 1.5); //go to tower
   lIntake.stop();
@@ -242,7 +243,7 @@ void autonomous(void)
   //The fabled 9th tower
   printf("\n9th tower\n");
   driveSystem.backOut(intakeSpeed, 300, -250); //back out
-  driveSystem.turnDegrees(6, 300); //face ball
+  driveSystem.turnDegrees(7, 300); //face ball
   lIntake.spin(forward, intakeSpeed, rpm);
   rIntake.spin(forward, intakeSpeed, rpm);
   driveSystem.driveDistance(500, 600); //get ball
@@ -256,11 +257,12 @@ void autonomous(void)
   driveSystem.turnDegrees(-5, 150); //face tower
   lIntake.spin(forward, -intakeSpeed, rpm); //outtake to ensure that we poke out
   rIntake.spin(forward, -intakeSpeed, rpm);
-  driveSystem.driveDistance(500, 600, 2); //get to the tower
-  lIntake.spin(forward, intakeSpeed, rpm);
-  rIntake.spin(forward, intakeSpeed, rpm);
+  driveSystem.driveDistance(500, 600, 1); //get to the tower
+  //driveSystem.turnDegrees(-6, 250);
+  lIntake.stop();
+  rIntake.stop();
   driveSystem.scoreBall(6, 2); //Try to score the ball for 2 seconds
-  driveSystem.backOut(intakeSpeed, 300, -300); //get outta dodge
+  //driveSystem.backOut(intakeSpeed, 300, -300); //get outta dodge
 }
 
 /*---------------------------------------------------------------------------*/
