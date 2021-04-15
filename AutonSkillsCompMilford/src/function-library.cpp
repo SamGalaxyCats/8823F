@@ -238,7 +238,6 @@ void Robot::turnOnlyLeftBack(double degreees, double degreesPerSecond)
 {
   bLeftDrive.spin(forward, -degreesPerSecond, dps);
   fLeftDrive.spin(forward, -degreesPerSecond, dps);
-
   while(accella.rotation() > degreees)
   {
     vex::task::sleep(10);
